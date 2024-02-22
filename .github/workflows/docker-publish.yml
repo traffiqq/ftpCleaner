@@ -28,5 +28,5 @@ jobs:
 
       - name: 'Build Inventory Image'
         run: |
-          docker build . --tag ghcr.io/traffiqq/store:latest
-          docker push ghcr.io/traffiqq/store:latest
+          docker build . --tag ghcr.io/traffiq/ftpCleaner:latest
+          docker push ghcr.io/traffiq/ftpCleaner:latest
