@@ -23,8 +23,14 @@ env:
 
 
 jobs:
-  dotnet:
+  docker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -37,24 +43,8 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
-        
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build . --file CleanFtp/Dockerfile --tag my-image-name:$(date +%s)
-        
-  publish:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
-
-    steps:
+      - name: DockerBuild
+        run: docker build . --file CleanFtp/Dockerfile --tag my-image-name:$(date +%s)  
       - name: Checkout repository
         uses: actions/checkout@v3
 
