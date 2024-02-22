@@ -18,4 +18,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CleanFtp.dll"]
-LABEL org.opencontainers.image.source="https://github.com/traffiq/ftpcleaner"
+LABEL org.opencontainers.image.source="https://github.com/traffiqq/ftpcleaner"
