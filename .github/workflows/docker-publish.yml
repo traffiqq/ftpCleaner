@@ -44,10 +44,7 @@ jobs:
       - name: Test
         run: dotnet test --no-build --verbosity normal
       - name: DockerBuild
-        run: docker build . --file CleanFtp/Dockerfile --tag my-image-name:$(date +%s)  
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
+        run: docker build . --file CleanFtp/Dockerfile --tag my-image-name:$(date +%s)
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
@@ -86,9 +83,9 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
-          context: .
+          context: "{{defaultContext}}:CleanFtp"
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: traffiqq/CleanFtp:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
