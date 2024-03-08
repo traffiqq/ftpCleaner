@@ -8,11 +8,7 @@ services:
   ftpCleaner:
     image: 'ghcr.io/traffiqq/ftpcleaner:latest'
     restart: unless-stopped
-
-      # Add any other Stream port you want to expose
-    # - '21:21' # FTP
-
-    # Uncomment the next line if you uncomment anything in the section
+    
     environment:
       FTP_HOST: "host.com"
       FTP_USER: "username"
