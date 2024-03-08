@@ -33,5 +33,5 @@ jobs:
 
       - name: 'Build Inventory Image'
         run: |
-          docker build . --tag ghcr.io/traffiqq/ftpcleaner:latest
+          docker build . --file CleanFtp/Dockerfile --tag ghcr.io/traffiqq/ftpcleaner:latest
           docker push ghcr.io/traffiqq/ftpcleaner:latest
