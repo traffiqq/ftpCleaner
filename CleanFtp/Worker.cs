@@ -11,6 +11,26 @@ public class Worker : BackgroundService
     private string? Password => Environment.GetEnvironmentVariable("FTP_PASSWORD");
     private string? Directory => Environment.GetEnvironmentVariable("FTP_DIRECTORY");
 
+    private int? Port
+    {
+        get
+        {
+            var port = Environment.GetEnvironmentVariable("FTP_PORT");
+            if (string.IsNullOrEmpty(port)) return null;
+
+            if (!int.TryParse(port, out var ftpPort))
+            {
+                _logger.LogError("Could not parse FTP_PORT: '{ftpPort}'", ftpPort);
+                return null;
+            }
+
+            if (ftpPort >= 0) return ftpPort;
+
+            _logger.LogError("ftpPort must be positive: '{ftpPort}'", ftpPort);
+            return null;
+        }
+    }
+    
     private int? DeleteOlderThanXDays
     {
         get
@@ -160,6 +180,12 @@ public class Worker : BackgroundService
             _logger.LogError("Password not specified");
             return null;
         }
+        
+        if (this.Port == null)
+        {
+            _logger.LogError("Port not specified");
+            return null;
+        }        
 
         if (this.DeleteOlderThanXDays == null)
         {
@@ -171,7 +197,7 @@ public class Worker : BackgroundService
 
         try
         {
-            client.AutoConnect();
+            client.Connect();
         }
         catch (Exception e)
         {

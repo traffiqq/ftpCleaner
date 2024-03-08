@@ -4,14 +4,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development",
-        "FTP_HOST": "HOST",
-        "FTP_USER": "USER",
-        "FTP_PASSWORD": "PASSWORD",
-        "FTP_DIRECTORY": "/path",
-        "DeleteOlderThanXDays": "14",
-        "DRY_RUN": "N",
-        "CYCLE_TIME": "24"
+        "DOTNET_ENVIRONMENT": "Development"        
       }
     }
   }
