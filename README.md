@@ -1,4 +1,4 @@
-Deletes all files recursively thare are older than 'x' days on a given ftp remote.
+Deletes all files recursively that are older than 'x' days on a given ftp remote.
 It also removes empty directories.
 
 Run via docker-compose:
